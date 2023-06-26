@@ -13,7 +13,7 @@ datasource db {
 model User {
   id       Int       @id @default(autoincrement())
   email    String    @unique
-  username String
+  username String    @unique
   password String
   Profile  Profile?
   Article  Article[]
@@ -35,7 +35,7 @@ model Article {
   updatedAt DateTime @default(now())
   createdAt DateTime @default(now())
 
-  creator   User           @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  creator   User         @relation(fields: [creatorId], references: [id], onDelete: Cascade)
   creatorId Int
   tag       ArticleTag[]
 }
