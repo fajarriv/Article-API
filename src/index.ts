@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import userRouter from './routes/user';
+import articleRouter from './routes/article';
 
 
 dotenv.config();
@@ -23,3 +24,4 @@ app.listen(port, () => {
 
 // routing
 app.use("/api/v1/users", userRouter)
+app.use("/api/v1/articles", articleRouter)
