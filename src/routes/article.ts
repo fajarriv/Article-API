@@ -1,10 +1,48 @@
 import { Router } from "express";
-import { createArticle, deleteArticle, getArticle, updateArticle } from "../controller/article";
+import {
+  createArticle,
+  deleteArticle,
+  getArticle,
+  updateArticle,
+} from "../controller/article";
 import { tokenVerifier } from "../middleware/tokenVerifier";
+import validate from "../middleware/validator";
+import { body, param, query } from "express-validator";
 
 const articleRouter: Router = Router();
-articleRouter.post("/", tokenVerifier, createArticle);
-articleRouter.get("/", tokenVerifier, getArticle)
-articleRouter.delete("/:articleId", tokenVerifier, deleteArticle)
-articleRouter.patch("/:articleId", tokenVerifier, updateArticle)
+articleRouter.post(
+  "/",
+  tokenVerifier,
+  validate([
+    body("title").exists().isString(),
+    body("content").exists().isString(),
+    body("tags").exists().isArray(),
+    body("tags.*").exists().isString(),
+  ]),
+  createArticle
+);
+
+articleRouter.get(
+  "/",
+  tokenVerifier,
+  validate([query("creatorId").isString().optional()]),
+  getArticle
+);
+
+articleRouter.delete(
+  "/:articleId",
+  tokenVerifier,
+  validate([param("articleId").isInt()]),
+  deleteArticle
+);
+articleRouter.patch(
+  "/:articleId",
+  tokenVerifier,
+  validate([
+    param("articleId").isInt(),
+    body("title").optional().isString(),
+    body("content").optional().isString()
+  ]),
+  updateArticle
+);
 export default articleRouter;
