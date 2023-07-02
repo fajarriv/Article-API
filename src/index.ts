@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import userRouter from './routes/user';
 import articleRouter from './routes/article';
+import swaggerUi from "swagger-ui-express";
+import * as swaggerDocument from "../swagger.json";
 
 
 dotenv.config();
@@ -25,3 +27,5 @@ app.listen(port, () => {
 // routing
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/articles", articleRouter)
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
