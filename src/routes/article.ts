@@ -35,13 +35,13 @@ articleRouter.delete(
   validate([param("articleId").isInt()]),
   deleteArticle
 );
-articleRouter.patch(
+articleRouter.put(
   "/:articleId",
   tokenVerifier,
   validate([
     param("articleId").isInt(),
-    body("title").optional().isString(),
-    body("content").optional().isString()
+    body("title").isString(),
+    body("content").isString()
   ]),
   updateArticle
 );
