@@ -29,3 +29,4 @@ app.use("/api/v1/users", userRouter)
 app.use("/api/v1/articles", articleRouter)
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+export default app;
