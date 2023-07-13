@@ -53,7 +53,7 @@ export const createArticle = async (req: RequestWithUserId, res: Response) => {
       article: { ...transaction, tags: tags },
     });
   } catch (error) {
-    return res.status(500).send(error);
+    res.status(500).send("Internal Server Error");
   }
 };
 
@@ -85,7 +85,9 @@ export const getArticle = async (req: RequestWithUserId, res: Response) => {
       return { ...rest, tag: newTags };
     });
     return res.status(200).send(result);
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).send("Internal Server Error");
+  }
 };
 
 export const deleteArticle = async (req: RequestWithUserId, res: Response) => {
@@ -104,7 +106,7 @@ export const deleteArticle = async (req: RequestWithUserId, res: Response) => {
     return res.status(200).send({ message: "Article deleted successfully" });
   } catch (error) {
     console.log(error);
-    return res.status(500).send(error);
+    res.status(500).send("Internal Server Error");
   }
 };
 
@@ -127,7 +129,7 @@ export const updateArticle = async (req: RequestWithUserId, res: Response) => {
     });
     return res.status(200).send({ message: "Article updated successfully" });
   } catch (error) {
+    res.status(500).send("Internal Server Error");
     console.log(error);
-    return res.status(500).send(error);
   }
 };

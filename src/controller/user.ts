@@ -27,6 +27,7 @@ export const register = async (req: Request, res: Response) => {
 
     res.status(201).json({ token });
   } catch (error) {
+    res.status(500).send("Internal Server Error");
     console.log(error);
   }
 };
@@ -56,6 +57,7 @@ export const login = async (req: Request, res: Response) => {
 
     res.status(200).json({ token });
   } catch (error) {
+    res.status(500).send("Internal Server Error");
     console.log(error);
   }
 };

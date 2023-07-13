@@ -35,7 +35,7 @@ articleRouter.delete(
   validate([param("articleId").isInt()]),
   deleteArticle
 );
-articleRouter.put(
+articleRouter.patch(
   "/:articleId",
   tokenVerifier,
   validate([
