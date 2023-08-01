@@ -11,8 +11,8 @@ userRouter.post(
     body("email").exists().isString(),
     body("password").exists().isString(),
     body("username").exists().isString(),
-    body("firstname").exists().isString(),
-    body("lastname").exists().isString(),
+    body("firstName").exists().isString(),
+    body("lastName").exists().isString(),
   ]),
   register
 );
